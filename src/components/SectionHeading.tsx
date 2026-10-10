@@ -4,10 +4,12 @@ interface SectionHeadingProps {
   eyebrow?: string;
   title: string;
   description?: string;
+  surface?: "dark" | "light";
 }
 
-export default function SectionHeading({ eyebrow, title, description }: SectionHeadingProps) {
+export default function SectionHeading({ eyebrow, title, description, surface = "dark" }: SectionHeadingProps) {
   const shouldReduceMotion = useReducedMotion();
+  const onLight = surface === "light";
 
   return (
     <motion.div
@@ -18,12 +20,19 @@ export default function SectionHeading({ eyebrow, title, description }: SectionH
       className="mb-10 max-w-2xl"
     >
       {eyebrow && (
-        <span className="mb-3 inline-block rounded-full bg-accent px-3 py-1 font-mono text-xs uppercase tracking-wider text-text shadow-sm ring-1 ring-inset ring-white/10">
+        <span
+          className={`mb-3 flex items-center gap-2 font-mono text-xs uppercase tracking-wider ${onLight ? "text-accent-ink" : "text-accent"}`}
+        >
+          <span className={`h-1.5 w-1.5 ${onLight ? "bg-accent-ink" : "bg-accent"}`} aria-hidden="true" />
           {eyebrow}
         </span>
       )}
-      <h2 className="text-2xl font-semibold tracking-tight text-text sm:text-3xl">{title}</h2>
-      {description && <p className="mt-3 text-text-secondary">{description}</p>}
+      <h2
+        className={`font-display text-3xl uppercase tracking-tight sm:text-4xl ${onLight ? "text-ink" : "text-text"}`}
+      >
+        {title}
+      </h2>
+      {description && <p className={`mt-3 ${onLight ? "text-ink-secondary" : "text-text-secondary"}`}>{description}</p>}
     </motion.div>
   );
 }

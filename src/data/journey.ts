@@ -28,6 +28,12 @@ export const journey: JourneyNode[] = [
     description: "Started submitting bug bounty reports on live targets.",
   },
   {
+    title: "Security Research",
+    date: "TODO",
+    description:
+      "Ongoing focus on SOC, threat hunting, OSINT, and reverse engineering alongside bug bounty work.",
+  },
+  {
     title: "Technical Blogging",
     date: "TODO",
     description: "Started writing technical write-ups on Medium.",
@@ -43,7 +49,7 @@ export const journey: JourneyNode[] = [
     description: "Built a Splunk-based home SOC lab to practice SSH brute-force detection.",
   },
   {
-    title: "Current SOC Analyst Journey",
+    title: "Aspiring SOC Practitioner",
     date: "Present",
     description: "Continuing to build toward a SOC Analyst role through labs, certifications, and hands-on practice.",
   },

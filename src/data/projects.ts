@@ -10,7 +10,6 @@ export interface Project {
   githubUrl: string;
   featured: boolean;
   large?: boolean;
-  todo?: string;
 }
 
 export const projects: Project[] = [
@@ -90,18 +89,5 @@ export const projects: Project[] = [
       "Reinforced string manipulation, modular arithmetic, and basic brute-force cryptanalysis logic — foundational concepts for CTF and cipher-analysis work.",
     githubUrl: "https://github.com/ShakthivelB/Caesar-Cipher-Tool",
     featured: true,
-  },
-  {
-    title: "TODO — 5th Featured Project",
-    category: "TODO",
-    securityRelevance: "",
-    description: "Pending confirmed details from Shakthivel before publishing.",
-    purpose: "",
-    approach: "",
-    technologies: [],
-    keyLearning: "",
-    githubUrl: "",
-    featured: false,
-    todo: "CLAUDE.md originally listed a 'network-scanning' repo, but it 404s and isn't in the current GitHub repo list. Awaiting correct project details.",
   },
 ];

@@ -53,12 +53,12 @@ export default function Navbar() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors ${
-        scrolled ? "bg-bg/90 backdrop-blur border-b border-panel" : "bg-transparent"
+        scrolled ? "bg-bg/90 border-b border-border" : "bg-transparent"
       }`}
     >
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-card focus:px-3 focus:py-2 focus:text-text"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-card focus:px-3 focus:py-2 focus:text-ink"
       >
         Skip to content
       </a>
@@ -68,7 +68,7 @@ export default function Navbar() {
       >
         <button
           onClick={() => handleNavClick("mission")}
-          className="flex items-center gap-2 text-text font-semibold tracking-tight"
+          className="flex items-center gap-2 font-display text-lg uppercase tracking-wide text-text"
           aria-label="Go to top"
         >
           <ShieldCheck className="h-5 w-5 text-accent" aria-hidden="true" />
@@ -83,10 +83,10 @@ export default function Navbar() {
                 <button
                   onClick={() => handleNavClick(item.id)}
                   aria-current={isActive ? "true" : undefined}
-                  className={`relative rounded-full px-3 py-1.5 text-sm transition-colors ${
+                  className={`relative border-b-2 px-1 py-1.5 text-sm transition-colors ${
                     isActive
-                      ? "bg-accent text-text"
-                      : "text-text-secondary hover:text-text"
+                      ? "border-accent text-accent"
+                      : "border-transparent text-text-secondary hover:text-text"
                   }`}
                 >
                   {item.label}
@@ -107,15 +107,15 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <ul className="flex flex-col gap-1 border-t border-panel bg-bg px-4 pb-4 lg:hidden">
+        <ul className="flex flex-col gap-1 border-t border-border bg-bg px-4 pb-4 lg:hidden">
           {NAV_ITEMS.map((item) => (
             <li key={item.id}>
               <button
                 onClick={() => handleNavClick(item.id)}
-                className={`block w-full rounded-lg px-3 py-3 text-left text-sm ${
+                className={`block w-full border-l-2 px-3 py-3 text-left text-sm ${
                   activeId === item.id
-                    ? "bg-accent text-text"
-                    : "text-text-secondary hover:text-text"
+                    ? "border-accent text-accent"
+                    : "border-transparent text-text-secondary hover:text-text"
                 }`}
               >
                 {item.label}

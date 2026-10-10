@@ -1,10 +1,25 @@
+import type { ComponentType } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { Radar, Crosshair, Bug, FlaskConical, Globe, Cpu, Workflow, Clock } from "lucide-react";
 import SectionHeading from "./SectionHeading";
+import Stepper from "./ui/Stepper";
 import { methodologies, focusAreas } from "../data/research";
+import { bugBountyPending } from "../data/bugBounty";
+import { metrics } from "../data/profile";
+
+const FOCUS_ICONS: Record<string, ComponentType<{ className?: string }>> = {
+  "Security Operations": Radar,
+  "Threat Hunting": Crosshair,
+  "Bug Bounty": Bug,
+  "Security Research": FlaskConical,
+  OSINT: Globe,
+  "Reverse Engineering": Cpu,
+  "Security Automation": Workflow,
+};
 
 export default function Research() {
   const shouldReduceMotion = useReducedMotion();
+  const reportCount = metrics.find((m) => m.label === "Bug Bounty Reports");
 
   return (
     <section id="research" aria-label="Research and Focus Areas" className="py-20">
@@ -16,16 +31,37 @@ export default function Research() {
         />
 
         <div className="mb-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {focusAreas.map((area) => (
-            <div
-              key={area.title}
-              className="rounded-lg border border-panel border-l-2 border-l-accent bg-card p-5"
-            >
-              <h3 className="text-sm font-medium text-text">{area.title}</h3>
-              <p className="mt-2 text-sm text-text-secondary">{area.description}</p>
-            </div>
-          ))}
+          {focusAreas.map((area) => {
+            const Icon = FOCUS_ICONS[area.title];
+            return (
+              <div key={area.title} className="panel border-l-2 border-l-accent-ink p-5">
+                <div className="flex items-center gap-2.5">
+                  {Icon && <Icon className="h-4 w-4 text-ink-secondary" aria-hidden="true" />}
+                  <h3 className="text-sm font-medium text-ink">{area.title}</h3>
+                </div>
+                <p className="mt-2 text-sm text-ink-secondary">{area.description}</p>
+              </div>
+            );
+          })}
         </div>
+
+        {reportCount && (
+          <div className="mb-12 flex flex-wrap items-center gap-4">
+            <div className="flex items-center gap-3 rounded-md border border-card-border bg-card px-4 py-2">
+              <Bug className="h-4 w-4 text-accent-ink" aria-hidden="true" />
+              <span className="text-sm text-ink">
+                {reportCount.value}
+                {reportCount.suffix} Bug Bounty Reports
+              </span>
+            </div>
+            {bugBountyPending.pending && (
+              <p className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-wide text-muted">
+                <Clock className="h-3.5 w-3.5" aria-hidden="true" />
+                Individual report details pending confirmation
+              </p>
+            )}
+          </div>
+        )}
 
         <div className="grid gap-6 lg:grid-cols-2">
           {methodologies.map((methodology) => (
@@ -35,22 +71,13 @@ export default function Research() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.4 }}
-              className="rounded-xl border border-panel bg-card p-6"
+              className="panel p-6"
             >
-              <h3 className="text-base font-medium text-text">{methodology.title}</h3>
-              <p className="mt-1 text-sm text-text-secondary">{methodology.description}</p>
-              <ol className="mt-4 flex flex-wrap items-center gap-x-1 gap-y-2 font-mono text-xs text-text-secondary">
-                {methodology.steps.map((s, idx) => (
-                  <li key={s.step} className="flex items-center gap-1">
-                    <span className="rounded border border-panel bg-panel/60 px-2 py-1 text-text">
-                      {s.step}
-                    </span>
-                    {idx < methodology.steps.length - 1 && (
-                      <ArrowRight className="h-3 w-3 text-muted" aria-hidden="true" />
-                    )}
-                  </li>
-                ))}
-              </ol>
+              <h3 className="text-base font-medium text-ink">{methodology.title}</h3>
+              <p className="mt-1 text-sm text-ink-secondary">{methodology.description}</p>
+              <div className="mt-4">
+                <Stepper steps={methodology.steps.map((s) => s.step)} />
+              </div>
             </motion.div>
           ))}
         </div>

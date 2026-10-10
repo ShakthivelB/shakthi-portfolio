@@ -14,7 +14,7 @@ export const certifications: Certification[] = [
   },
   {
     title: "Cybersecurity Certification Course",
-    issuer: "TODO — issuer not specified",
+    issuer: "InventaTeq",
     status: "Completed",
   },
   {
@@ -34,7 +34,7 @@ export const certifications: Certification[] = [
   },
   {
     title: "OWASP Overview",
-    issuer: "TODO — issuer not specified",
+    issuer: "IBM",
     status: "Completed",
   },
   {

@@ -5,11 +5,11 @@ export interface SocialLink {
 
 export const profile = {
   name: "Shakthivel B",
-  careerGoal: "Aspiring SOC Analyst",
+  careerGoal: "Aspiring SOC Practitioner",
   currentRole: "Technical Support Engineer",
   currentCompany: "IBM",
   currentProject: "AusNet Energy & Utility",
-  location: "Bangalore, India",
+  location: "Bengaluru, India",
   yearsOfExperience: "1.5 Years",
   availability: "Open to SOC Analyst Opportunities",
   heroTagline: "Security Researcher • Bug Bounty • OSINT • Reverse Engineering",

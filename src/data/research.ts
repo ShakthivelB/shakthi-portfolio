@@ -48,7 +48,7 @@ export const focusAreas = [
   },
   {
     title: "Bug Bounty",
-    description: "Active bug bounty testing with reports on findings such as weak password policies and GraphQL API issues.",
+    description: "Active bug bounty testing across web applications, focused on responsible reporting.",
   },
   {
     title: "Security Research",

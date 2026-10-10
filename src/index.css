@@ -1,23 +1,45 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
+/* Registers --spot-r as an animatable length so BinaryMatrixBackground's
+   cursor spotlight can transition its radius (an "opening iris" effect)
+   instead of snapping instantly. */
+@property --spot-r {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
 @theme {
-  --color-bg: #7f1020;
-  --color-bg-secondary: #5c0c18;
-  --color-card: #211116;
-  --color-panel: #29151a;
-  --color-crimson: #b11226;
-  --color-deep-red: #7f1020;
-  --color-text: #f8fafc;
-  --color-text-secondary: #d1bfc3;
-  --color-muted: #9a7d83;
-  --color-accent: #c8102e;
-  --color-accent-secondary: #e11d48;
+  --color-bg: #000000;
+  --color-bg-secondary: #0b1100;
+  --color-card: #eeeeee;
+  --color-panel: #ffffff;
+  --color-border: rgba(238, 238, 238, 0.08);
+  --color-border-strong: rgba(238, 238, 238, 0.16);
+  --color-text: #eeeeee;
+  --color-text-secondary: #a6a6a6;
+  --color-muted: #737373;
+  --color-accent: #08cb00;
+  --color-accent-soft: #39d533;
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
   --color-success: #22c55e;
 
+  /* On-light tokens: for text/icons/borders placed on the light card/panel
+     surfaces above, where the dark-canvas tokens no longer have contrast. */
+  --color-ink: #10190a;
+  --color-ink-secondary: #3f4a35;
+  --color-ink-muted: #565d4c;
+  --color-card-border: rgba(16, 25, 10, 0.14);
+  --color-card-border-strong: rgba(16, 25, 10, 0.24);
+  --color-chip-oncard: rgba(16, 25, 10, 0.07);
+  --color-accent-ink: #0b5c00;
+  --color-success-ink: #157a3d;
+  --color-warning-ink: #8a5a06;
+
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Oswald", "Arial Narrow", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
 }
 
@@ -42,12 +64,7 @@
   }
 
   body {
-    background-image:
-      radial-gradient(ellipse 90% 55% at 50% -10%, rgba(225, 29, 72, 0.55), transparent),
-      radial-gradient(ellipse 70% 40% at 100% 100%, rgba(177, 18, 38, 0.35), transparent),
-      linear-gradient(rgba(248, 250, 252, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(248, 250, 252, 0.04) 1px, transparent 1px);
-    background-size: auto, auto, 48px 48px, 48px 48px;
+    background-image: radial-gradient(ellipse 90% 70% at 50% 0%, rgba(255, 255, 255, 0.03), transparent);
     background-attachment: fixed;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -63,5 +80,19 @@
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
     border-radius: 2px;
+  }
+}
+
+@layer components {
+  .panel {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-card-border);
+    border-radius: 8px;
+  }
+
+  .panel-raised {
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-card-border-strong);
+    border-radius: 8px;
   }
 }

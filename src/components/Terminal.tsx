@@ -21,11 +21,14 @@ const COMMANDS: Record<string, { description: string; run: () => void }> = {
     run: () => window.open(profile.links.github, "_blank", "noopener,noreferrer"),
   },
   contact: { description: "Jump to Connect", run: () => scrollToSection("connect") },
+  clear: { description: "Clear the terminal log", run: () => {} },
 };
 
 const HELP_TEXT = Object.entries(COMMANDS)
   .map(([name, cmd]) => `  ${name.padEnd(10)} ${cmd.description}`)
   .join("\n");
+
+const HIRE_EASTER_EGG = "Permission granted. Now go tell Shakthivel directly — shakthisv90@gmail.com.";
 
 interface LogLine {
   input: string;
@@ -60,8 +63,16 @@ export default function Terminal() {
     const command = input.trim().toLowerCase();
     if (!command) return;
 
+    if (command === "clear") {
+      setLog([]);
+      setInput("");
+      return;
+    }
+
     let output: string;
-    if (command === "help") {
+    if (command === "sudo hire shakthi") {
+      output = HIRE_EASTER_EGG;
+    } else if (command === "help") {
       output = HELP_TEXT;
     } else if (COMMANDS[command]) {
       COMMANDS[command].run();
@@ -89,7 +100,7 @@ export default function Terminal() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.4 }}
           onClick={() => inputRef.current?.focus()}
-          className="cursor-text rounded-xl border border-panel bg-[#0a0e1a] p-4 font-mono text-sm shadow-inner"
+          className="cursor-text rounded-md border border-border bg-bg-secondary p-4 font-mono text-sm"
         >
           <div className="mb-3 flex items-center gap-2 text-muted">
             <TerminalSquare className="h-4 w-4" aria-hidden="true" />
@@ -105,7 +116,7 @@ export default function Terminal() {
             </p>
             {log.map((line, i) => (
               <div key={i}>
-                {line.input && <p className="text-accent-secondary">$ {line.input}</p>}
+                {line.input && <p className="text-accent">$ {line.input}</p>}
                 <p className="whitespace-pre-wrap text-text-secondary">{line.output}</p>
               </div>
             ))}
